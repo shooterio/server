@@ -1,8 +1,11 @@
 import { EntityMap } from 'colyseus';
 import { Player } from '../../models/player';
+import { Map } from '../../models/map';
+import { Position } from '../../models/position';
 
 export class State {
     players: EntityMap<Player> = {};
+    map: Map = new Map(50, 100, new Position(50, 50))
     constructor () {
         //Do here some init stuff;
         var player1 = Player.generate();
@@ -12,6 +15,7 @@ export class State {
         var player3 = Player.generate();
         this.players[player3.id] = player3;
         console.log(this.players);
+        console.log(this.map);
     };
 
     addPlayer (client) {
