@@ -7,20 +7,32 @@ import { Base } from '../../models/base';
 
 export class State {
     players: EntityMap<Player> = {};
+    teams: EntityMap<Team> = {};
     map: Map = new Map(50, 100, new Position(50, 50));
-    teamRed: Team = new Team("Red", new Base(100, new Position(75, 75)));
-    teamBlue: Team = new Team("Blue", new Base(100, new Position(75, 125)));
 
 
     constructor () {
         console.log(this.map);
-        console.log(this.teamRed);
-        console.log(this.teamBlue);
+        this.addTeam(new Team("Red", new Base(100, new Position(75, 75))));
+        this.addTeam(new Team("Blue", new Base(100, new Position(75, 125))));
+        console.log(this.teams);
     };
+
+    addTeam (team: Team)
+    {
+        this.teams[team.id] = team;
+    }
 
     addPlayer (client) {
         var countTeamRed: Number;
         var countTeamBlue: Number;
+
+        this.players[client.id] = new Player(client.id, 100, 1, this.teams.array.id);
+
+        for(let teamId in this.players)
+        {
+            console.log(teamId)
+        }
 
         console.log(this.players);
 
