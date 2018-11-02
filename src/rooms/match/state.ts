@@ -2,24 +2,29 @@ import { EntityMap } from 'colyseus';
 import { Player } from '../../models/player';
 import { Map } from '../../models/map';
 import { Position } from '../../models/position';
+import { Team } from '../../models/team';
+import { Base } from '../../models/base';
 
 export class State {
     players: EntityMap<Player> = {};
-    map: Map = new Map(50, 100, new Position(50, 50))
+    map: Map = new Map(50, 100, new Position(50, 50));
+    teamRed: Team = new Team("Red", new Base(100, new Position(75, 75)));
+    teamBlue: Team = new Team("Blue", new Base(100, new Position(75, 125)));
+
+
     constructor () {
-        //Do here some init stuff;
-        var player1 = Player.generate();
-        this.players[player1.id] = player1;
-        var player2 = Player.generate();
-        this.players[player2.id] = player2;
-        var player3 = Player.generate();
-        this.players[player3.id] = player3;
-        console.log(this.players);
         console.log(this.map);
+        console.log(this.teamRed);
+        console.log(this.teamBlue);
     };
 
     addPlayer (client) {
-        this.players[client.id] = new Player(client.id, 100, 6);
+        var countTeamRed: Number;
+        var countTeamBlue: Number;
+
+        console.log(this.players);
+
+        //this.players[client.id] = new Player(client.id, 100, 1, );
         console.log('added player');
     };
 
