@@ -2,8 +2,8 @@ import { Position } from './../models/position';
 import { PlayerInput } from './../models/playerInput';
 
 export class Player {
-    public rotation: Number;
-    
+    public rotation: number;
+
     constructor (
         public id: string,
         public health: number,
@@ -18,6 +18,6 @@ export class Player {
         this.position = position;
         this.teamId = teamId;
         this.playerInput = playerInput; 
-        this.rotation = Math.random() * 360;
+        this.rotation = Math.round(Math.random() * 360);
     }
 }
