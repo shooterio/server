@@ -137,7 +137,7 @@ export class State {
     
     [ActionTypes.SHOOT] (clientid, payload) {
         console.log("shoot");
-        addBullet(clientid)
+        this.addBullet(clientid);
     }
 
 
