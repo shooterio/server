@@ -13,8 +13,8 @@ export class State {
 
     constructor () {
         console.log(this.map);
-        this.addTeam(new Team("Red", new Base(100, new Position(75, 75))));
-        this.addTeam(new Team("Blue", new Base(100, new Position(75, 125))));
+        this.addTeam(new Team("Red", new Base(100, new Position(35, 50))));
+        this.addTeam(new Team("Blue", new Base(100, new Position(85, 50))));
         console.log(this.teams);
     };
 
@@ -94,5 +94,11 @@ export class State {
 
     movePlayers() {
         //foreach player move in direction he moves defined by his playerinput
+        var players = this.players;
+        var keysPlayers = Object.keys(this.players);
+
+        keysPlayers.forEach(keyPlayer => {
+            
+        });
     }
 };
