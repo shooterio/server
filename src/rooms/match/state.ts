@@ -6,11 +6,14 @@ import { PlayerInput } from '../../models/playerInput';
 import { Team } from '../../models/team';
 import { Base } from '../../models/base';
 
+const bullet = require('../../models/bullet');
+
 import * as ActionTypes from './actionTypes';
 
 export class State {
     players: EntityMap<Player> = {};
     teams: EntityMap<Team> = {};
+    bullets: EntityMap<Team> = {};
     map: Map = new Map(5000, 10000, new Position(5000, 5000));
 
     constructor () {
@@ -44,6 +47,14 @@ export class State {
         delete this.players[client.id]
         console.log('removed player');
     };
+
+    addBullet (client) {
+        
+    }
+
+    removeBullet (client) {
+
+    }
 
     getTeamsAsArray() {
         var teams = this.teams;

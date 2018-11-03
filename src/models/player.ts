@@ -1,4 +1,3 @@
-import * as shortid from 'shortid';
 import { Position } from './../models/position';
 import { PlayerInput } from './../models/playerInput';
 
