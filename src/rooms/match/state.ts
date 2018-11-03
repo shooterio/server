@@ -32,7 +32,7 @@ export class State {
             1,
             new Position(this.teams[team].base.position.x, this.teams[team].base.position.y),
             team,
-            new PlayerInput(false, false, false, false));
+            new PlayerInput(true, false, true, false));
         console.log(this.players);
         
         console.log('added player');
@@ -93,17 +93,29 @@ export class State {
     }
 
     movePlayers() {
+        var BASE_MOVE = 0.001;
         //foreach player move in direction he moves defined by his playerinput
         var players = this.players;
         var keysPlayers = Object.keys(this.players);
 
         keysPlayers.forEach(keyPlayer => {
-            if(this.players[keyPlayer].playerInput.down)
+            var player = this.players[keyPlayer];
+            var distanceToTravel = BASE_MOVE * player.moveSpeed;
+            if(player.playerInput.up)
             {
-                this.players[keyPlayer].position.y =- 1;
-            }else{
-
+                player.position.y =+ distanceToTravel;
             }
+            if(player.playerInput.down) {
+                player.position.y =- distanceToTravel;
+            }
+            if(player.playerInput.left) {
+                player.position.x =- distanceToTravel;
+            }
+            if(player.playerInput.right) {
+                player.position.x =+ distanceToTravel;
+            }
+
+            console.log(player.position);
         });
     }
 
