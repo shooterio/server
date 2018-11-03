@@ -101,16 +101,16 @@ export class State {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
             console.log(this.players[keyPlayer].playerInput);
             if(this.players[keyPlayer].playerInput.up) {
-                this.players[keyPlayer].position.y =+ distanceToTravel;
+                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
             }
             if(this.players[keyPlayer].playerInput.down) {
-                this.players[keyPlayer].position.y =- distanceToTravel;
+                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y - distanceToTravel;
             }
             if(this.players[keyPlayer].playerInput.left) {
-                this.players[keyPlayer].position.x =- distanceToTravel;
+                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x - distanceToTravel;
             }
             if(this.players[keyPlayer].playerInput.right) {
-                this.players[keyPlayer].position.x =+ distanceToTravel;
+                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
             }
         });
     }
