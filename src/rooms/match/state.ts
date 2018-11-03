@@ -2,6 +2,7 @@ import { EntityMap } from 'colyseus';
 import { Player } from '../../models/player';
 import { Map } from '../../models/map';
 import { Position } from '../../models/position';
+import { PlayerInput } from '../../models/playerInput';
 import { Team } from '../../models/team';
 import { Base } from '../../models/base';
 
@@ -9,7 +10,6 @@ export class State {
     players: EntityMap<Player> = {};
     teams: EntityMap<Team> = {};
     map: Map = new Map(50, 100, new Position(50, 50));
-
 
     constructor () {
         console.log(this.map);
@@ -26,12 +26,17 @@ export class State {
     addPlayer (client) {
         var team = this.getTeamIdWithFewestPlayers();
 
-        this.players[client.id] = new Player(client.id, 100, 1, this.teams[team].base.position, team);
+        this.players[client.id] = new Player(
+            client.id,
+            100,
+            1,
+            new Position(this.teams[team].base.position.x, this.teams[team].base.position.y),
+            team,
+            new PlayerInput(false, false, false, false));
         console.log(this.players);
         
         console.log('added player');
     };
-
 
     removePlayer (client) {
         delete this.players[client.id]
@@ -81,9 +86,13 @@ export class State {
     
         return teamWithFewestPlayers.id;
     
-      }
+    }
 
-    calculateState () {
+    calculateState() {
+        this.movePlayers()
+    }
 
-    };
+    movePlayers() {
+        //foreach player move in direction he moves defined by his playerinput
+    }
 };
