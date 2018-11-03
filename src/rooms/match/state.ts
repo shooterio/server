@@ -128,17 +128,18 @@ export class State {
     {
         var xCheck: boolean = false;
         var yCheck: boolean = false;
-
-        if(x < this.map.width && x > 0)
+        console.log(x);
+        console.log(y);
+        if(x < 10000 && x > 0)
         {
             xCheck = true
         }
 
-        if(y < this.map.height && y > 0)
+        if(y < 5000 && y > 0)
         {
             yCheck = true;
         }
-        console.log(xCheck && yCheck);
+        
         return xCheck && yCheck;
     }
 };
