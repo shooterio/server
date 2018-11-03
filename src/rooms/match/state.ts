@@ -157,8 +157,8 @@ export class State {
             var deltaY = this.bullets[keyBullet].position.y;
             var deltaX = this.bullets[keyBullet].position.x;
 
-            var distanceX = Math.cos(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed;
-            var distanceY = Math.sin(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed;
+            var distanceX = Math.round(Math.cos(this.bullets[keyBullet].rotation)) * this.bullets[keyBullet].speed;
+            var distanceY = Math.round(Math.sin(this.bullets[keyBullet].rotation)) * this.bullets[keyBullet].speed;
 
             if(distanceX >= 0){
                 newDeltaX = deltaX + distanceX;
