@@ -145,7 +145,7 @@ export class State {
     checkBulletLifeCycle () {
         var keysBullet = Object.keys(this.bullets);
 
-        keysBullet.forEach(function(keyBullet){
+        keysBullet.forEach((keyBullet) => {
             if(this.bullets[keyBullet].spawnTime - Date.now() > 2000) {
                 delete this.bullets[keyBullet];
             }
