@@ -94,7 +94,7 @@ export class State {
     }
 
     movePlayers() {
-        var BASE_MOVE = 0.1;
+        var BASE_MOVE = 1;
         //foreach player move in direction he moves defined by his playerinput
         var keysPlayers = Object.keys(this.players);
 
@@ -102,16 +102,16 @@ export class State {
         keysPlayers.forEach(keyPlayer => {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
             if(this.players[keyPlayer].playerInput.up) {
-                this.players[keyPlayer].position.y = Decimal(this.players[keyPlayer].position.y).add(distanceToTravel).toNumber();
+                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
             }
             if(this.players[keyPlayer].playerInput.down) {
-                this.players[keyPlayer].position.y = Decimal(this.players[keyPlayer].position.y).sub(distanceToTravel).toNumber();
+                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y - distanceToTravel;
             }
             if(this.players[keyPlayer].playerInput.left) {
-                this.players[keyPlayer].position.x = Decimal(this.players[keyPlayer].position.x).sub(distanceToTravel).toNumber();
+                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x - distanceToTravel;
             }
             if(this.players[keyPlayer].playerInput.right) {
-                this.players[keyPlayer].position.x = Decimal(this.players[keyPlayer].position.x).add(distanceToTravel).toNumber();
+                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
             }
             
             console.log(this.players[keyPlayer].position)
