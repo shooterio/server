@@ -50,9 +50,7 @@ export class State {
     };
 
     addBullet (clientid) {
-        var bullet: Bullet = new Bullet(
-            new Position(this.players[clientid].position.x, this.players[clientid].position.y),
-            this.players[clientid], this.players[clientid].rotation);
+        var bullet: Bullet = new Bullet(new Position(this.players[clientid].position.x, this.players[clientid].position.y), this.players[clientid], this.players[clientid].rotation);
         this.bullets[bullet.id] = bullet;
     }
 
