@@ -99,6 +99,7 @@ export class State {
 
         keysPlayers.forEach(keyPlayer => {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
+            console.log(this.players[keyPlayer].playerInput);
             if(this.players[keyPlayer].playerInput.up) {
                 this.players[keyPlayer].position.y =+ distanceToTravel;
             }
