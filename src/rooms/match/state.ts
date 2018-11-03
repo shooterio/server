@@ -27,6 +27,7 @@ export class State {
         var countTeamRed: Number;
         var countTeamBlue: Number;
 
+        console.log(this.players.teamId);
 
         console.log(this.players);
 
