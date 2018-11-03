@@ -199,6 +199,12 @@ export class State {
                     //HIT
                     this.players[key].health = player.health - bullet.damage;
                     delete this.bullets[keyBullet];
+                    if(this.players[key].health <= 0) {
+                        var teamSpawn = this.teams[player.teamId].base.position;
+                        this.players[key].health = 100;
+                        this.players[key].position.x = teamSpawn.x;
+                        this.players[key].position.y = teamSpawn.y;
+                    }
                     break;
                 }
             }
