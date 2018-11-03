@@ -13,7 +13,7 @@ export class State {
 
     constructor () {
         console.log(this.map);
-        this.addTeam(new Team("Red", new Base(50, new Position(15, 50))));
+        this.addTeam(new Team("Red", new Base(100, new Position(15, 50))));
         this.addTeam(new Team("Blue", new Base(100, new Position(85, 50))));
         console.log(this.teams);
     };
@@ -93,7 +93,7 @@ export class State {
     }
 
     movePlayers() {
-        var BASE_MOVE = 0.001;
+        var BASE_MOVE = 1;
         //foreach player move in direction he moves defined by his playerinput
         var keysPlayers = Object.keys(this.players);
 
