@@ -138,6 +138,8 @@ export class State {
 
     [ActionTypes.PLAYER_ROTATE] (clientid, payload) {
         console.log("player_rotate");
+        if(payload < 0) {payload += 360};
+        payload = Math.round(payload);
         this.players[clientid].rotation = payload;
     }
 
@@ -160,16 +162,16 @@ export class State {
             var distanceX = Math.round(Math.cos(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed);
             var distanceY = Math.round(Math.sin(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed);
 
-            if((this.bullets[keyBullet].rotation) < 180 && (this.bullets[keyBullet].rotation) >= 0){
+            if((this.bullets[keyBullet].rotation) < 180 ){
                 newDeltaX = deltaX - distanceX;
             } else {
                 newDeltaX = deltaX + distanceX;
             }
 
-            if(((this.bullets[keyBullet].rotation) < 90 && (this.bullets[keyBullet].rotation) >= 0) || ((this.bullets[keyBullet].rotation) < 359 && (this.bullets[keyBullet].rotation) >= 270)){
+            if(((this.bullets[keyBullet].rotation) < 90 && (this.bullets[keyBullet].rotation) > 270)){
                 newDeltaY = deltaY + distanceY;
             } else {
-                newDeltaY = deltaY - distanceX;
+                newDeltaY = deltaY - distanceY;
             }
             
             this.bullets[keyBullet].position = new Position(newDeltaX, newDeltaY);
