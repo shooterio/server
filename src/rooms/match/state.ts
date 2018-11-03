@@ -112,8 +112,6 @@ export class State {
             if(this.players[keyPlayer].playerInput.right) {
                 this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
             }
-            
-            console.log(this.players[keyPlayer].position)
         });
         
     }
