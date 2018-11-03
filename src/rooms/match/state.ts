@@ -96,27 +96,26 @@ export class State {
         var BASE_MOVE = 1;
         //foreach player move in direction he moves defined by his playerinput
         var keysPlayers = Object.keys(this.players);
-
         
         keysPlayers.forEach(keyPlayer => {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
             if(this.players[keyPlayer].playerInput.up) {
-                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                if(this.checkIfYUpCoordinatesInGame(this.players[keyPlayer].position.y)){
                     this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
                 }
             }
             if(this.players[keyPlayer].playerInput.down) {
-                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                if(this.checkIfYDownCoordinatesInGame(this.players[keyPlayer].position.y)){
                     this.players[keyPlayer].position.y = this.players[keyPlayer].position.y - distanceToTravel;
                 }
             }
             if(this.players[keyPlayer].playerInput.left) {
-                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                if(this.checkIfXLeftCoordinatesInGame(this.players[keyPlayer].position.x)){
                     this.players[keyPlayer].position.x = this.players[keyPlayer].position.x - distanceToTravel;
                 }
             }
             if(this.players[keyPlayer].playerInput.right) {
-                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                if(this.checkIfXRightCoordinatesInGame(this.players[keyPlayer].position.x)){
                     this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
                 }
             }
@@ -124,21 +123,23 @@ export class State {
         
     }
 
-    checkIfCoordinatesInGame(x: number, y:number)
+    checkIfXRightCoordinatesInGame(x: number)
     {
-        var xCheck: boolean = false;
-        var yCheck: boolean = false;
-        
-        if(x < 10000 && x > 0)
-        {
-            xCheck = true
-        }
+        return x < 10000;
+    }
 
-        if(y < 7500 && y > 2500)
-        {
-            yCheck = true;
-        }
+    checkIfXLeftCoordinatesInGame(x: number)
+    {
+        return x > 0;
+    }
 
-        return xCheck && yCheck;
+    checkIfYUpCoordinatesInGame(y:number)
+    {
+        return y < 7500;
+    }
+
+    checkIfYDownCoordinatesInGame(y:number)
+    {
+        return y > 2500;
     }
 };
