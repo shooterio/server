@@ -46,5 +46,12 @@ export class Match extends Room {
 
     update () {
         this.state.calculateState()
+        var teamKeys = Object.keys(this.state.teams);
+        teamKeys.forEach(teamKey => {
+            var teamHealth = this.state.teams[teamKey].base.health;
+            if(teamHealth <= 0) {
+                this.disconnect();
+            }
+        });
     };
 };
