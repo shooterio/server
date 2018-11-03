@@ -101,16 +101,24 @@ export class State {
         keysPlayers.forEach(keyPlayer => {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
             if(this.players[keyPlayer].playerInput.up) {
-                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
+                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                    this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
+                }
             }
             if(this.players[keyPlayer].playerInput.down) {
-                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y - distanceToTravel;
+                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                    this.players[keyPlayer].position.y = this.players[keyPlayer].position.y - distanceToTravel;
+                }
             }
             if(this.players[keyPlayer].playerInput.left) {
-                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x - distanceToTravel;
+                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                    this.players[keyPlayer].position.x = this.players[keyPlayer].position.x - distanceToTravel;
+                }
             }
             if(this.players[keyPlayer].playerInput.right) {
-                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
+                if(this.checkIfCoordinatesInGame(this.players[keyPlayer].position.x, this.players[keyPlayer].position.y)){
+                    this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
+                }
             }
         });
         
@@ -121,12 +129,12 @@ export class State {
         var xCheck: boolean = false;
         var yCheck: boolean = false;
 
-        if(x <= 100 && x >= 0)
+        if(x < this.map.width && x > 0)
         {
             xCheck = true
         }
 
-        if(y <= 50 && y >= 0)
+        if(y < this.map.height && y > 0)
         {
             yCheck = true;
         }
