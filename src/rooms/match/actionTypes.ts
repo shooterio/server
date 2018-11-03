@@ -17,6 +17,7 @@ export const MOVE_RIGHT = 'MOVE_RIGHT';
 //N
 //O
 //P
+export const PLAYER_ROTATE = 'PLAYER_ROTATE';
 //Q
 //R
 //S

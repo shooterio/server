@@ -136,11 +136,36 @@ export class State {
         this.addBullet(clientid);
     }
 
+    [ActionTypes.PLAYER_ROTATE] (clientid, payload) {
+        console.log("player_rotate");
+        this.players[clientid].rotation = payload;
+    }
 
     calculateState() {
         this.movePlayers()
         this.checkBulletLifeCycle();
     }
+
+    /*calculateBulletMovement() {
+        var keysBullet = Object.keys(this.bullets);
+
+        keysBullet.forEach((keyBullet) => {
+            var newDeltaY: number;
+            var newDeltaX: number;
+
+            var deltaY = this.bullets[keyBullet].position.y;
+            var deltaX = this.bullets[keyBullet].position.x;
+
+            var distanceX = Math.cos(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed;
+            var distanceY = Math.sin(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed;
+
+            if(distanceX >= 0){
+                newDeltaX = deltaX
+            }else{
+
+            }
+        });
+    }*/
 
     checkBulletLifeCycle () {
         var keysBullet = Object.keys(this.bullets);

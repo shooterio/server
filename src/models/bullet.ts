@@ -12,10 +12,10 @@ export class Bullet {
     constructor (
         public position: Position,
         public owner: Player,
-        public rotation: Number
+        public rotation: number
     ) {
         this.id = shortid.generate();
-        this.speed = .7;
+        this.speed = 50;
         this.radius = .25;
         this.damage =  20;
         this.position = position;
