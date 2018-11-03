@@ -34,7 +34,7 @@ export class State {
 
         this.players[client.id] = new Player(
             client.id,
-            5,
+            100,
             6,
             new Position(this.teams[team].base.position.x, this.teams[team].base.position.y),
             team,
@@ -197,7 +197,7 @@ export class State {
 
                 if(distance < (bullet.radius + player.radius)) {
                     //HIT
-                    this.players[key].health = player.health - bullet.damage;
+                    this.players[key].health = player.health - (bullet.damage * 20);
                     delete this.bullets[keyBullet];
                     if(this.players[key].health <= 0) {
                         var teamSpawn = this.teams[player.teamId].base.position;
