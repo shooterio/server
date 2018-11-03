@@ -24,12 +24,9 @@ export class State {
     }
 
     addPlayer (client) {
-        var countTeamRed: Number;
-        var countTeamBlue: Number;
-
         var team = this.getTeamIdWithFewestPlayers();
 
-        this.players[client.id] = new Player(client.id, 100, 1, team);
+        this.players[client.id] = new Player(client.id, 100, 1, this.teams[team].base.position, team);
         console.log(this.players);
         
         console.log('added player');
