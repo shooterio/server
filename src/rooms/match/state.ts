@@ -27,12 +27,6 @@ export class State {
         var countTeamRed: Number;
         var countTeamBlue: Number;
 
-        this.players[client.id] = new Player(client.id, 100, 1, this.teams.array.id);
-
-        for(let teamId in this.players)
-        {
-            console.log(teamId)
-        }
 
         console.log(this.players);
 
