@@ -200,8 +200,8 @@ export class State {
             console.log(bullet.position.y);
             console.log('radius: ' + bullet.radius);
             console.log('rotation: ' + bullet.rotation);
-            bullet.position.x = bullet.position.x + (bullet.speed * Math.cos((bullet.rotation - 90)*(Math.PI/180)));
-            bullet.position.y = bullet.position.y + (bullet.speed * Math.sin((bullet.rotation-90)*(Math.PI/180)));
+            bullet.position.x = bullet.position.x + (bullet.speed * Math.cos((bullet.rotation + 90)*(Math.PI/180)));
+            bullet.position.y = bullet.position.y + (bullet.speed * Math.sin((bullet.rotation+90)*(Math.PI/180)));
         });
     }
 
