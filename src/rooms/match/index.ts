@@ -36,7 +36,7 @@ export class Match extends Room {
     //When a client send a message
     onMessage (client, data) {
         console.log("MatchRoom:", client.id, data);
-        this.state[data.type](data.payload);
+        this.state[data.type](client.id, data.payload);
     };
 
     //Cleanup callback, called after there are no more clients on the room
