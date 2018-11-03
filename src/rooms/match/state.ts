@@ -97,9 +97,9 @@ export class State {
         //foreach player move in direction he moves defined by his playerinput
         var keysPlayers = Object.keys(this.players);
 
+        
         keysPlayers.forEach(keyPlayer => {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
-            console.log(this.players[keyPlayer].playerInput);
             if(this.players[keyPlayer].playerInput.up) {
                 this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
             }
@@ -113,6 +113,7 @@ export class State {
                 this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
             }
         });
+        
     }
 
     checkIfCoordinatesInGame(x: number, y:number)
