@@ -93,7 +93,7 @@ export class State {
     }
 
     movePlayers() {
-        var BASE_MOVE = 1;
+        var BASE_MOVE = 0.1;
         //foreach player move in direction he moves defined by his playerinput
         var keysPlayers = Object.keys(this.players);
 
