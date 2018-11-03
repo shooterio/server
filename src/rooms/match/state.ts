@@ -99,11 +99,11 @@ export class State {
     }
 
     [ActionTypes.MOVE_LEFT] (payload) {
-        console.log(payload);
+        console.log(payload.MOVE_LEFT);
     }
 
     [ActionTypes.MOVE_RIGHT] (payload) {
-        console.log(payload);
+        console.log(payload.MOVE_RIGHT);
     }
 
 
