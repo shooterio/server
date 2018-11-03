@@ -139,7 +139,7 @@ export class State {
         {
             yCheck = true;
         }
-        
-        return xCheck && yCheck;
+
+        return true;
     }
 };
