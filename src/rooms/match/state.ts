@@ -91,23 +91,35 @@ export class State {
     }
 
     [ActionTypes.MOVE_UP] (clientid, payload) {
-        console.log(payload);
-        console.log(clientid);
+        if(payload) {
+            this.players[clientid].playerInput.up = payload;
+        } else {
+            this.players[clientid].playerInput.up = payload;
+        }
     }
 
     [ActionTypes.MOVE_DOWN] (clientid, payload) {
-        console.log(payload);
-        console.log(clientid);
+        if(payload) {
+            this.players[clientid].playerInput.down = payload;
+        } else {
+            this.players[clientid].playerInput.down = payload;
+        }
     }
 
     [ActionTypes.MOVE_LEFT] (clientid, payload) {
-        console.log(payload);
-        console.log(clientid);
+        if(payload) {
+            this.players[clientid].playerInput.left = payload;
+        } else {
+            this.players[clientid].playerInput.left = payload;
+        }
     }
 
     [ActionTypes.MOVE_RIGHT] (clientid, payload) {
-        console.log(payload);
-        console.log(clientid);
+        if(payload) {
+            this.players[clientid].playerInput.right = payload;
+        } else {
+            this.players[clientid].playerInput.right = payload;
+        }
     }
 
 
