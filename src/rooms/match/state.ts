@@ -13,7 +13,7 @@ export class State {
 
     constructor () {
         console.log(this.map);
-        this.addTeam(new Team("Red", new Base(100, new Position(15, 50))));
+        this.addTeam(new Team("Red", new Base(50, new Position(15, 50))));
         this.addTeam(new Team("Blue", new Base(100, new Position(85, 50))));
         console.log(this.teams);
     };
@@ -98,7 +98,30 @@ export class State {
         var keysPlayers = Object.keys(this.players);
 
         keysPlayers.forEach(keyPlayer => {
-            
+            if(this.players[keyPlayer].playerInput.down)
+            {
+                this.players[keyPlayer].position.y =- 1;
+            }else{
+
+            }
         });
+    }
+
+    checkIfCoordinatesInGame(x: number, y:number)
+    {
+        var xCheck: boolean = false;
+        var yCheck: boolean = false;
+
+        if(x <= 100 && x >= 0)
+        {
+            xCheck = true
+        }
+
+        if(y <= 50 && y >= 0)
+        {
+            yCheck = true;
+        }
+
+        return xCheck && yCheck;
     }
 };
