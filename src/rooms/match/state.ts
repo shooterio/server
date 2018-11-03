@@ -32,7 +32,7 @@ export class State {
             1,
             new Position(this.teams[team].base.position.x, this.teams[team].base.position.y),
             team,
-            new PlayerInput(true, false, true, false));
+            new PlayerInput(false, false, false, false));
         console.log(this.players);
         
         console.log('added player');
