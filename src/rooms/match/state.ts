@@ -27,16 +27,11 @@ export class State {
         var countTeamRed: Number;
         var countTeamBlue: Number;
 
-        var teams = this.getTeamsAsArray();
+        var team = this.getTeamIdWithFewestPlayers();
 
-
-        this.players[client.id] = new Player(client.id, 100, 1, teams[0]);
-
-        console.log(this.players.teamId);
-
+        this.players[client.id] = new Player(client.id, 100, 1, team);
         console.log(this.players);
-
-        //this.players[client.id] = new Player(client.id, 100, 1, );
+        
         console.log('added player');
     };
 
@@ -58,6 +53,38 @@ export class State {
     
         return teamsArr;
     };
+
+    getTeamIdWithFewestPlayers() {
+        var teams = this.teams;
+        var keysTeams = Object.keys(teams);
+    
+        var players = this.players;
+        var keysPlayers = Object.keys(this.players);
+
+        var teamWithFewestPlayers;
+        var numberOfPlayersInTeamWithFewestPlayers = Infinity;
+    
+        keysTeams.forEach(keyTeam => {
+          var numberOfPlayersInTeam = 0;
+          keysPlayers.forEach(keyPlayer => {
+            var isInThisTeam = players[keyPlayer].teamId == keyTeam;
+            numberOfPlayersInTeam = isInThisTeam ? numberOfPlayersInTeam + 1 : numberOfPlayersInTeam;
+          });
+    
+          if(teamWithFewestPlayers) {
+            teamWithFewestPlayers = numberOfPlayersInTeamWithFewestPlayers > numberOfPlayersInTeam ?
+            teams[keyTeam] :
+            teamWithFewestPlayers;
+            numberOfPlayersInTeamWithFewestPlayers = numberOfPlayersInTeam;
+          } else {
+            teamWithFewestPlayers = teams[keyTeam];
+            numberOfPlayersInTeamWithFewestPlayers = numberOfPlayersInTeam;
+          };
+        });
+    
+        return teamWithFewestPlayers.id;
+    
+      }
 
     calculateState () {
 
