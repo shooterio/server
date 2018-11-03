@@ -50,7 +50,14 @@ export class State {
     };
 
     addBullet (clientid) {
-        var bullet: Bullet = new Bullet(new Position(this.players[clientid].position.x, this.players[clientid].position.y), this.players[clientid], this.players[clientid].rotation);
+        var bullet: Bullet = new Bullet(
+            new Position(this.players[clientid].position.x,
+                this.players[clientid].position.y),
+                this.players[clientid],
+                this.players[clientid].rotation);
+                
+        bullet.position.x = bullet.position.x + ((this.players[clientid].radius + bullet.radius) * Math.cos((bullet.rotation + 90)*(Math.PI/180)));
+        bullet.position.y = bullet.position.y + ((this.players[clientid].radius + bullet.radius) * Math.sin((bullet.rotation+90)*(Math.PI/180)));
         this.bullets[bullet.id] = bullet;
     }
 
@@ -147,6 +154,7 @@ export class State {
         this.movePlayers();
         this.calculateBulletMovement();
         this.checkBulletLifeCycle();
+        this.collisionHit();
     }
 
     calculateBulletMovement() {
@@ -187,6 +195,7 @@ export class State {
 
                 var distance = Math.sqrt(a*a + b*b);
 
+                console.log(distance < (bullet.radius + player.radius));
                 if(distance < (bullet.radius + player.radius)) {
                     //HIT
                     player.health = player.health - bullet.damage;
