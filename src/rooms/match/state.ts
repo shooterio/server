@@ -35,7 +35,7 @@ export class State {
         this.players[client.id] = new Player(
             client.id,
             100,
-            3,
+            6,
             new Position(this.teams[team].base.position.x, this.teams[team].base.position.y),
             team,
             new PlayerInput(false, false, false, false));
@@ -176,12 +176,24 @@ export class State {
 
         keysBullets.forEach((keyBullet) => {
             var bullet = this.bullets[keyBullet];
-            keysPlayer.forEach((keyPlayer) => {
-                var player = this.players[keyPlayer];
-                if(player.position){
-                    player.health =- 10;
+
+            for(var i = 0; i < keysPlayer.length; i++){
+                var key = keysPlayer[i];
+                var player = this.players[key];
+                var c = Math.sqrt( a*a + b*b );
+
+                var a = bullet.position.x - player.position.x;
+                var b = bullet.position.y - player.position.y;
+
+                var distance = Math.sqrt(a*a + b*b);
+
+                if(distance < (bullet.radius + player.radius)) {
+                    //HIT
+                    player.health = player.health - bullet.damage;
+                    delete this.bullets[keyBullet];
+                    break;
                 }
-            })
+            }
         });
     }
 
