@@ -175,7 +175,8 @@ export class State {
                 newDeltaY = deltaY - distanceY;
             }
             */
-            this.bullets[keyBullet].position = new Position(this.bullets[keyBullet].position.y + this.bullets[keyBullet].speed, this.bullets[keyBullet].position.x + this.bullets[keyBullet].speed);
+            this.bullets[keyBullet].position.y = this.bullets[keyBullet].position.y + this.bullets[keyBullet].speed;
+            this.bullets[keyBullet].position.x = this.bullets[keyBullet].position.x + this.bullets[keyBullet].speed;
         });
     }
 
