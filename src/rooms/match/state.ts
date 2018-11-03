@@ -113,9 +113,10 @@ export class State {
             if(this.players[keyPlayer].playerInput.right) {
                 this.players[keyPlayer].position.x = Decimal(this.players[keyPlayer].position.x).add(distanceToTravel).toNumber();
             }
+            
+            console.log(this.players[keyPlayer].position)
         });
         
-        console.log(this.players[keysPlayers[0]].position)
     }
 
     checkIfCoordinatesInGame(x: number, y:number)
