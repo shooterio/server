@@ -11,13 +11,14 @@ export class Player {
         public position: Position,
         public teamId: string,
         public playerInput: PlayerInput,
+        //public rotation: Number,
     ) {
         this.id = id;
         this.health = health;
         this.moveSpeed = moveSpeed;
         this.position = position;
         this.teamId = teamId;
-        this.playerInput = playerInput;
-
+        this.playerInput = playerInput; 
+        //this.rotation = Math.random() * 360;
     }
 }
