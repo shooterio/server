@@ -156,23 +156,24 @@ export class State {
             
             var newDeltaY: number;
             var newDeltaX: number;
+            var newRot;
 
             var deltaY = this.bullets[keyBullet].position.y;
             var deltaX = this.bullets[keyBullet].position.x;
 
 
             if(this.bullets[keyBullet].rotation >= 0 && this.bullets[keyBullet].rotation <= 90){
-                this.bullets[keyBullet].rotation = this.bullets[keyBullet].rotation;
+                newRot = this.bullets[keyBullet].rotation;
             } else if (this.bullets[keyBullet].rotation >= 91 && this.bullets[keyBullet].rotation <= 180) {
-                this.bullets[keyBullet].rotation = this.bullets[keyBullet].rotation - 90;
+                newRot = this.bullets[keyBullet].rotation - 90;
             } else if (this.bullets[keyBullet].rotation >= 181 && this.bullets[keyBullet].rotation <= 270) {
-                this.bullets[keyBullet].rotation = this.bullets[keyBullet].rotation - 180;
+                newRot = this.bullets[keyBullet].rotation - 180;
             } else if (this.bullets[keyBullet].rotation >= 271 && this.bullets[keyBullet].rotation <= 360) {
-                this.bullets[keyBullet].rotation = this.bullets[keyBullet].rotation - 90;
+                newRot = this.bullets[keyBullet].rotation - 90;
             }
 
-            var distanceX = Math.round(Math.sin(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed);
-            var distanceY = Math.round(Math.cos(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed);
+            var distanceX = Math.round(Math.sin(newRot) * this.bullets[keyBullet].speed);
+            var distanceY = Math.round(Math.cos(newRot) * this.bullets[keyBullet].speed);
 
             if((this.bullets[keyBullet].rotation) < 180 ){
                 newDeltaX = deltaX - distanceX;
