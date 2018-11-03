@@ -6,6 +6,8 @@ import { PlayerInput } from '../../models/playerInput';
 import { Team } from '../../models/team';
 import { Base } from '../../models/base';
 
+import * as ActionTypes from './actionTypes';
+
 export class State {
     players: EntityMap<Player> = {};
     teams: EntityMap<Team> = {};
@@ -88,13 +90,30 @@ export class State {
     
     }
 
+    [ActionTypes.MOVE_UP] (payload) {
+        console.log(payload);
+    }
+
+    [ActionTypes.MOVE_DOWN] (payload) {
+        console.log(payload);
+    }
+
+    [ActionTypes.MOVE_LEFT] (payload) {
+        console.log(payload);
+    }
+
+    [ActionTypes.MOVE_RIGHT] (payload) {
+        console.log(payload);
+    }
+
+
     calculateState() {
         this.movePlayers()
     }
 
     movePlayers() {
         var BASE_MOVE = 1;
-        //foreach player move in direction he moves defined by his playerinput
+        
         var keysPlayers = Object.keys(this.players);
         
         keysPlayers.forEach(keyPlayer => {

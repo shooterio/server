@@ -1,5 +1,6 @@
 import { Room } from 'colyseus';
-import { State } from './state'
+import { State } from './state';
+import * as ActionTypes from './actionTypes';
 
 export class Match extends Room {
 
@@ -34,7 +35,8 @@ export class Match extends Room {
 
     //When a client send a message
     onMessage (client, data) {
-        console.log("MatchRoom:", client.id, data)
+        console.log("MatchRoom:", client.id, data);
+        this.state[data.type](data.payload);
     };
 
     //Cleanup callback, called after there are no more clients on the room
