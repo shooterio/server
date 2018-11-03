@@ -56,7 +56,9 @@ export class State {
     }
 
     removeBullet (clientid) {
+        setTimeout(function() {
 
+        }, 2000)
     }
 
     getTeamsAsArray() {

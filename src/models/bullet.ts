@@ -7,6 +7,7 @@ export class Bullet {
     public damage: number;
     public speed: number;
     public radius: number;
+    public spawnTime: any;
 
     constructor (
         public position: Position,
@@ -18,5 +19,6 @@ export class Bullet {
         this.radius = .25;
         this.damage =  20;
         this.position = position;
+        this.spawnTime = Date.now();
     }
 }
