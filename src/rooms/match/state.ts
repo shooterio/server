@@ -153,6 +153,7 @@ export class State {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
+            var bullet = this.bullets[keyBullet];
             bullet.position.x = bullet.position.x + (bullet.speed * Math.cos((bullet.rotation + 90)*(Math.PI/180)));
             bullet.position.y = bullet.position.y + (bullet.speed * Math.sin((bullet.rotation+90)*(Math.PI/180)));
         });
