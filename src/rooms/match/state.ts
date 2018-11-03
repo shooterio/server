@@ -34,7 +34,7 @@ export class State {
 
         this.players[client.id] = new Player(
             client.id,
-            100,
+            5,
             6,
             new Position(this.teams[team].base.position.x, this.teams[team].base.position.y),
             team,
