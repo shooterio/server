@@ -90,21 +90,24 @@ export class State {
     
     }
 
-    [ActionTypes.MOVE_UP] (payload, client) {
+    [ActionTypes.MOVE_UP] (payload, clientid) {
         console.log(payload);
-        console.log(client);
+        console.log(clientid);
     }
 
-    [ActionTypes.MOVE_DOWN] (payload) {
+    [ActionTypes.MOVE_DOWN] (payload, clientid) {
         console.log(payload);
+        console.log(clientid);
     }
 
-    [ActionTypes.MOVE_LEFT] (payload) {
+    [ActionTypes.MOVE_LEFT] (payload, clientid) {
         console.log(payload);
+        console.log(clientid);
     }
 
-    [ActionTypes.MOVE_RIGHT] (payload) {
+    [ActionTypes.MOVE_RIGHT] (payload, clientid) {
         console.log(payload);
+        console.log(clientid);
     }
 
 
