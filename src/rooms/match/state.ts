@@ -195,7 +195,6 @@ export class State {
 
                 var distance = Math.sqrt(a*a + b*b);
 
-                console.log(distance < (bullet.radius + player.radius));
                 if(distance < (bullet.radius + player.radius)) {
                     //HIT
                     player.health = player.health - bullet.damage;
@@ -203,6 +202,27 @@ export class State {
                     break;
                 }
             }
+
+            if(bullet){
+                for(var i = 0; i < keysTeams.length; i++){
+                    var key = keysTeams[i];
+                    var base = this.teams[key].base;
+                    var c = Math.sqrt( a*a + b*b );
+    
+                    var a = bullet.position.x - base.position.x;
+                    var b = bullet.position.y - base.position.y;
+    
+                    var distance = Math.sqrt(a*a + b*b);
+    
+                    if(distance < (bullet.radius + base.radius)) {
+                        //HIT
+                        base.health = base.health - bullet.damage;
+                        delete this.bullets[keyBullet];
+                        break;
+                    }
+                }
+            }
+            
         });
     }
 
