@@ -50,7 +50,9 @@ export class State {
     };
 
     addBullet (clientid) {
-        var bullet: Bullet = new Bullet(new Position(this.players[clientid].position.x, this.players[clientid].position.y), this.players[clientid], this.players[clientid].rotation);
+        var bullet: Bullet = new Bullet(
+            new Position(this.players[clientid].position.x, this.players[clientid].position.y),
+            this.players[clientid], this.players[clientid].rotation);
         this.bullets[bullet.id] = bullet;
     }
 
@@ -153,53 +155,6 @@ export class State {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
-            /*
-            var newDeltaY: number;
-            var newDeltaX: number;
-            var newRot;
-
-            var deltaY = this.bullets[keyBullet].position.y;
-            var deltaX = this.bullets[keyBullet].position.x;
-
-
-            if(this.bullets[keyBullet].rotation >= 0 && this.bullets[keyBullet].rotation <= 90){
-                newRot = this.bullets[keyBullet].rotation;
-            } else if (this.bullets[keyBullet].rotation >= 91 && this.bullets[keyBullet].rotation <= 180) {
-                newRot = this.bullets[keyBullet].rotation - 90;
-            } else if (this.bullets[keyBullet].rotation >= 181 && this.bullets[keyBullet].rotation <= 270) {
-                newRot = this.bullets[keyBullet].rotation - 180;
-            } else if (this.bullets[keyBullet].rotation >= 271 && this.bullets[keyBullet].rotation <= 360) {
-                newRot = this.bullets[keyBullet].rotation - 90;
-            }
-
-            var distanceX = Math.round(Math.sin(newRot) * this.bullets[keyBullet].speed);
-            var distanceY = Math.round(Math.cos(newRot) * this.bullets[keyBullet].speed);
-
-            if((this.bullets[keyBullet].rotation) < 180 ){
-                newDeltaX = deltaX - distanceX;
-            } else {
-                newDeltaX = deltaX + distanceX;
-            }
-
-            if(((this.bullets[keyBullet].rotation) < 90 && (this.bullets[keyBullet].rotation) > 270)){
-                newDeltaY = deltaY + distanceY;
-            } else {
-                newDeltaY = deltaY - distanceY;
-            }
-            
-            
-            this.bullets[keyBullet].position.y = newDeltaY;
-            this.bullets[keyBullet].position.x = newDeltaX;
-            */
-            /*this.bullets[keyBullet].position.y = this.bullets[keyBullet].position.y + this.bullets[keyBullet].speed;
-            this.bullets[keyBullet].position.x = this.bullets[keyBullet].position.x + this.bullets[keyBullet].speed;*/
-            var bullet = this.bullets[keyBullet];
-            console.log('x: ' + bullet.position.x);
-            console.log('y: ' + bullet.position.y);
-            console.log(bullet.position.x);
-            console.log(bullet.position.y);
-            console.log('radius: ' + bullet.radius);
-            console.log('rotation: ' + bullet.rotation);
             bullet.position.x = bullet.position.x + (bullet.speed * Math.cos((bullet.rotation + 90)*(Math.PI/180)));
             bullet.position.y = bullet.position.y + (bullet.speed * Math.sin((bullet.rotation+90)*(Math.PI/180)));
         });
