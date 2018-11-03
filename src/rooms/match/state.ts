@@ -160,13 +160,13 @@ export class State {
             var distanceX = Math.round(Math.cos(this.bullets[keyBullet].rotation)) * this.bullets[keyBullet].speed;
             var distanceY = Math.round(Math.sin(this.bullets[keyBullet].rotation)) * this.bullets[keyBullet].speed;
 
-            if(distanceX >= 0){
-                newDeltaX = deltaX + distanceX;
-            } else {
+            if((this.bullets[keyBullet].rotation) < 180 && (this.bullets[keyBullet].rotation) >= 0){
                 newDeltaX = deltaX - distanceX;
+            } else {
+                newDeltaX = deltaX + distanceX;
             }
 
-            if(distanceY >= 0){
+            if(((this.bullets[keyBullet].rotation) < 90 && (this.bullets[keyBullet].rotation) >= 0) || ((this.bullets[keyBullet].rotation) < 359 && (this.bullets[keyBullet].rotation) >= 270)){
                 newDeltaY = deltaY + distanceY;
             } else {
                 newDeltaY = deltaY - distanceX;
