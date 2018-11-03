@@ -18,6 +18,6 @@ export class Player {
         this.position = position;
         this.teamId = teamId;
         this.playerInput = playerInput; 
-        this.rotation = Math.round(Math.random() * 360);
+        this.rotation = 180;
     }
 }
