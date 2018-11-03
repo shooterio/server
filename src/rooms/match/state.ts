@@ -144,9 +144,10 @@ export class State {
     calculateState() {
         this.movePlayers()
         this.checkBulletLifeCycle();
+        this.calculateBulletMovement();
     }
 
-    /*calculateBulletMovement() {
+    calculateBulletMovement() {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
@@ -160,12 +161,20 @@ export class State {
             var distanceY = Math.sin(this.bullets[keyBullet].rotation) * this.bullets[keyBullet].speed;
 
             if(distanceX >= 0){
-                newDeltaX = deltaX
-            }else{
-
+                newDeltaX = deltaX + distanceX;
+            } else {
+                newDeltaX = deltaX - distanceX;
             }
+
+            if(distanceY >= 0){
+                newDeltaY = deltaY + distanceY;
+            } else {
+                newDeltaY = deltaY - distanceX;
+            }
+
+            this.bullets[keyBullet].position = new Position(newDeltaX, newDeltaY);
         });
-    }*/
+    }
 
     checkBulletLifeCycle () {
         var keysBullet = Object.keys(this.bullets);
