@@ -1,3 +1,4 @@
+import Decimal from 'decimal';
 import { EntityMap } from 'colyseus';
 import { Player } from '../../models/player';
 import { Map } from '../../models/map';
@@ -101,19 +102,20 @@ export class State {
         keysPlayers.forEach(keyPlayer => {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
             if(this.players[keyPlayer].playerInput.up) {
-                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
+                this.players[keyPlayer].position.y = Decimal(this.players[keyPlayer].position.y).add(distanceToTravel).toNumber();
             }
             if(this.players[keyPlayer].playerInput.down) {
-                this.players[keyPlayer].position.y = this.players[keyPlayer].position.y - distanceToTravel;
+                this.players[keyPlayer].position.y = Decimal(this.players[keyPlayer].position.y).sub(distanceToTravel).toNumber();
             }
             if(this.players[keyPlayer].playerInput.left) {
-                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x - distanceToTravel;
+                this.players[keyPlayer].position.x = Decimal(this.players[keyPlayer].position.x).sub(distanceToTravel).toNumber();
             }
             if(this.players[keyPlayer].playerInput.right) {
-                this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
+                this.players[keyPlayer].position.x = Decimal(this.players[keyPlayer].position.x).add(distanceToTravel).toNumber();
             }
         });
         
+        console.log(this.players[keysPlayers[0]].position)
     }
 
     checkIfCoordinatesInGame(x: number, y:number)
