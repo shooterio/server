@@ -142,9 +142,9 @@ export class State {
     }
 
     calculateState() {
-        this.movePlayers()
-        this.checkBulletLifeCycle();
+        this.movePlayers();
         this.calculateBulletMovement();
+        this.checkBulletLifeCycle();
     }
 
     calculateBulletMovement() {
@@ -182,8 +182,8 @@ export class State {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
-            if(this.bullets[keyBullet].spawnTime - Date.now() > 2000) {
-                delete this.bullets[keyBullet];
+            if(Date.now() - this.bullets[keyBullet].spawnTime > 2000) {
+                delete this.bullets[keyBullet]; 
             }
         });
     }
