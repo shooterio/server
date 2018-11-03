@@ -128,7 +128,7 @@ export class State {
     }
 
     movePlayers() {
-        var BASE_MOVE = 1;
+        var BASE_MOVE = 3;
         
         var keysPlayers = Object.keys(this.players);
         
