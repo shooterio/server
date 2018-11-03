@@ -95,27 +95,24 @@ export class State {
     movePlayers() {
         var BASE_MOVE = 0.001;
         //foreach player move in direction he moves defined by his playerinput
-        var players = this.players;
         var keysPlayers = Object.keys(this.players);
 
         keysPlayers.forEach(keyPlayer => {
-            var player = this.players[keyPlayer];
-            var distanceToTravel = BASE_MOVE * player.moveSpeed;
-            if(player.playerInput.up)
-            {
-                player.position.y =+ distanceToTravel;
+            var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
+            if(this.players[keyPlayer].playerInput.up) {
+                this.players[keyPlayer].position.y =+ distanceToTravel;
             }
-            if(player.playerInput.down) {
-                player.position.y =- distanceToTravel;
+            if(this.players[keyPlayer].playerInput.down) {
+                this.players[keyPlayer].position.y =- distanceToTravel;
             }
-            if(player.playerInput.left) {
-                player.position.x =- distanceToTravel;
+            if(this.players[keyPlayer].playerInput.left) {
+                this.players[keyPlayer].position.x =- distanceToTravel;
             }
-            if(player.playerInput.right) {
-                player.position.x =+ distanceToTravel;
+            if(this.players[keyPlayer].playerInput.right) {
+                this.players[keyPlayer].position.x =+ distanceToTravel;
             }
 
-            console.log(player.position);
+            console.log(this.players[keyPlayer].position);
         });
     }
 
