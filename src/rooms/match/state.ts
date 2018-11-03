@@ -128,7 +128,7 @@ export class State {
     {
         var xCheck: boolean = false;
         var yCheck: boolean = false;
-        console.log(y < 5000 && y > 0);
+        console.log(y);
         if(x < 10000 && x > 0)
         {
             xCheck = true
