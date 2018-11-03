@@ -192,7 +192,7 @@ export class State {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
-            if(Date.now() - this.bullets[keyBullet].spawnTime > 2000) {
+            if(Date.now() - this.bullets[keyBullet].spawnTime > 10000) {
                 delete this.bullets[keyBullet]; 
             }
         });
