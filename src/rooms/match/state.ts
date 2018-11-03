@@ -153,7 +153,7 @@ export class State {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
-            /*
+            
             var newDeltaY: number;
             var newDeltaX: number;
 
@@ -174,9 +174,13 @@ export class State {
             } else {
                 newDeltaY = deltaY - distanceY;
             }
-            */
-            this.bullets[keyBullet].position.y = this.bullets[keyBullet].position.y + this.bullets[keyBullet].speed;
-            this.bullets[keyBullet].position.x = this.bullets[keyBullet].position.x + this.bullets[keyBullet].speed;
+            
+            
+            this.bullets[keyBullet].position.y = newDeltaY;
+            this.bullets[keyBullet].position.x = newDeltaX;
+
+            /*this.bullets[keyBullet].position.y = this.bullets[keyBullet].position.y + this.bullets[keyBullet].speed;
+            this.bullets[keyBullet].position.x = this.bullets[keyBullet].position.x + this.bullets[keyBullet].speed;*/
         });
     }
 
