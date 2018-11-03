@@ -9,11 +9,12 @@ import { Base } from '../../models/base';
 const bullet = require('../../models/bullet');
 
 import * as ActionTypes from './actionTypes';
+import { Bullet } from '../../models/bullet';
 
 export class State {
     players: EntityMap<Player> = {};
     teams: EntityMap<Team> = {};
-    bullets: EntityMap<Team> = {};
+    bullets: EntityMap<Bullet> = {};
     map: Map = new Map(5000, 10000, new Position(5000, 5000));
 
     constructor () {
@@ -48,11 +49,12 @@ export class State {
         console.log('removed player');
     };
 
-    addBullet (client) {
-        
+    addBullet (clientid) {
+        var bullet: Bullet = new Bullet(this.players[clientid].position, this.players[clientid], this.players[clientid].rotation);
+        this.bullets[bullet.id] = bullet;
     }
 
-    removeBullet (client) {
+    removeBullet (clientid) {
 
     }
 
@@ -131,6 +133,11 @@ export class State {
         } else {
             this.players[clientid].playerInput.right = payload;
         }
+    } 
+    
+    [ActionTypes.SHOOT] (clientid, payload) {
+        console.log("shoot");
+        addBullet(clientid)
     }
 
 

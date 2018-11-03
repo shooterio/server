@@ -20,6 +20,7 @@ export const MOVE_RIGHT = 'MOVE_RIGHT';
 //Q
 //R
 //S
+export const SHOOT = 'SHOOT';
 //T
 //U
 //V

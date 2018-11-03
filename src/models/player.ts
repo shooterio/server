@@ -2,15 +2,15 @@ import { Position } from './../models/position';
 import { PlayerInput } from './../models/playerInput';
 
 export class Player {
-
+    public rotation: Number;
+    
     constructor (
         public id: string,
         public health: number,
         public moveSpeed: number,
         public position: Position,
         public teamId: string,
-        public playerInput: PlayerInput,
-        //public rotation: Number,
+        public playerInput: PlayerInput
     ) {
         this.id = id;
         this.health = health;
@@ -18,6 +18,6 @@ export class Player {
         this.position = position;
         this.teamId = teamId;
         this.playerInput = playerInput; 
-        //this.rotation = Math.random() * 360;
+        this.rotation = Math.random() * 360;
     }
 }
