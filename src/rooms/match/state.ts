@@ -52,13 +52,6 @@ export class State {
     addBullet (clientid) {
         var bullet: Bullet = new Bullet(new Position(this.players[clientid].position.x, this.players[clientid].position.y), this.players[clientid], this.players[clientid].rotation);
         this.bullets[bullet.id] = bullet;
-        console.log(this.bullets);
-    }
-
-    removeBullet (clientid) {
-        setTimeout(function() {
-
-        }, 2000)
     }
 
     getTeamsAsArray() {
@@ -146,6 +139,17 @@ export class State {
 
     calculateState() {
         this.movePlayers()
+        this.checkBulletLifeCycle();
+    }
+
+    checkBulletLifeCycle () {
+        var keysBullet = Object.keys(this.bullets);
+
+        keysBullet.forEach(function(keyBullet){
+            if(this.bullets[keyBullet].spawnTime - Date.now() > 2000) {
+                delete this.bullets[keyBullet];
+            }
+        });
     }
 
     movePlayers() {
