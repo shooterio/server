@@ -138,7 +138,7 @@ export class State {
         {
             yCheck = true;
         }
-
+        console.log(xCheck && yCheck);
         return xCheck && yCheck;
     }
 };
