@@ -1,4 +1,4 @@
-import Decimal from 'decimal';
+import { Decimal } from 'decimal';
 import { EntityMap } from 'colyseus';
 import { Player } from '../../models/player';
 import { Map } from '../../models/map';
