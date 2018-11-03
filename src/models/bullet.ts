@@ -15,7 +15,7 @@ export class Bullet {
         public rotation: number
     ) {
         this.id = shortid.generate();
-        this.speed = 50;
+        this.speed = .7;
         this.radius = .25;
         this.damage =  20;
         this.position = position;
