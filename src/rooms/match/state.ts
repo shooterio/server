@@ -27,6 +27,11 @@ export class State {
         var countTeamRed: Number;
         var countTeamBlue: Number;
 
+        var teams = this.getTeamsAsArray();
+
+
+        this.players[client.id] = new Player(client.id, 100, 1, teams[0]);
+
         console.log(this.players.teamId);
 
         console.log(this.players);
@@ -39,6 +44,19 @@ export class State {
     removePlayer (client) {
         delete this.players[client.id]
         console.log('removed player');
+    };
+
+    getTeamsAsArray() {
+        var teams = this.teams;
+        var keysTeams = Object.keys(teams);
+    
+        var teamsArr = [];
+    
+        keysTeams.forEach(keyTeam => {
+          teamsArr.push(teams[keyTeam]);
+        });
+    
+        return teamsArr;
     };
 
     calculateState () {
