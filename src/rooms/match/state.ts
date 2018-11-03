@@ -163,9 +163,25 @@ export class State {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
-            if(Date.now() - this.bullets[keyBullet].spawnTime > 10000) {
+            if(Date.now() - this.bullets[keyBullet].spawnTime > 1000) {
                 delete this.bullets[keyBullet]; 
             }
+        });
+    }
+
+    collisionHit () {
+        var keysPlayer = Object.keys(this.players);
+        var keysBullets = Object.keys(this.bullets);
+        var keysTeams = Object.keys(this.teams);
+
+        keysBullets.forEach((keyBullet) => {
+            var bullet = this.bullets[keyBullet];
+            keysPlayer.forEach((keyPlayer) => {
+                var player = this.players[keyPlayer];
+                if(player.position){
+                    player.health =- 10;
+                }
+            })
         });
     }
 

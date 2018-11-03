@@ -16,7 +16,7 @@ export class Bullet {
     ) {
         this.id = shortid.generate();
         this.speed = 50;
-        this.radius = .25;
+        this.radius = 50;
         this.damage =  20;
         this.position = position;
         this.spawnTime = Date.now();
