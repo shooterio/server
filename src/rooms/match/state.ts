@@ -1,4 +1,3 @@
-import { Decimal } from 'decimal';
 import { EntityMap } from 'colyseus';
 import { Player } from '../../models/player';
 import { Map } from '../../models/map';
@@ -10,12 +9,12 @@ import { Base } from '../../models/base';
 export class State {
     players: EntityMap<Player> = {};
     teams: EntityMap<Team> = {};
-    map: Map = new Map(50, 100, new Position(50, 50));
+    map: Map = new Map(5000, 10000, new Position(5000, 5000));
 
     constructor () {
         console.log(this.map);
-        this.addTeam(new Team("Red", new Base(100, new Position(15, 50))));
-        this.addTeam(new Team("Blue", new Base(100, new Position(85, 50))));
+        this.addTeam(new Team("Red", new Base(100, new Position(1500, 5000))));
+        this.addTeam(new Team("Blue", new Base(100, new Position(8500, 5000))));
         console.log(this.teams);
     };
 
