@@ -54,7 +54,7 @@ export class State {
             new Position(this.players[clientid].position.x,
                 this.players[clientid].position.y),
                 this.players[clientid],
-                this.players[clientid].rotation + Math.floor((Math.random() * 6) + 1) - 3);
+                this.players[clientid].rotation + Math.floor(Math.random() * 6) - 3);
 
                 
         bullet.position.x = bullet.position.x + ((this.players[clientid].radius + bullet.radius) * Math.cos((bullet.rotation + 90)*(Math.PI/180)));
