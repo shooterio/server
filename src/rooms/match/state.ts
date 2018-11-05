@@ -189,7 +189,6 @@ export class State {
             for(var i = 0; i < keysPlayer.length; i++){
                 var key = keysPlayer[i];
                 var player = this.players[key];
-                var c = Math.sqrt( a*a + b*b );
 
                 var a = bullet.position.x - player.position.x;
                 var b = bullet.position.y - player.position.y;
@@ -214,7 +213,6 @@ export class State {
                 for(var i = 0; i < keysTeams.length; i++){
                     var key = keysTeams[i];
                     var base = this.teams[key].base;
-                    var c = Math.sqrt( a*a + b*b );
     
                     var a = bullet.position.x - base.position.x;
                     var b = bullet.position.y - base.position.y;
