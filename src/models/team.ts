@@ -4,13 +4,15 @@ import { Base } from './base';
 export class Team {
 
     public id: string;
-    
-    constructor (
+    public score: number;
+
+    constructor(
         public name: string,
         public base: Base,
     ) {
         this.id = shortid.generate();
         this.name = name;
         this.base = base;
+        this.score = 0;
     }
 }

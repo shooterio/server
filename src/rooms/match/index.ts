@@ -6,9 +6,9 @@ export class Match extends Room {
 
     maxClients = 100;
 
-    onInit (options) {
+    onInit(options) {
         this.setState(new State);
-        this.setPatchRate( 1000 / 20);
+        this.setPatchRate(1000 / 20);
         this.setSimulationInterval(this.update.bind(this));
 
         console.log("Match room created!", options);
@@ -22,36 +22,29 @@ export class Match extends Room {
     };
 
     //When a client joins the room
-    onJoin (client) {
+    onJoin(client) {
         this.state.addPlayer(client)
-        console.log(`${ client.id } joined match room.`)
+        console.log(`${client.id} joined match room.`)
     };
 
     //When a client leaves the room
-    onLeave (client) {
+    onLeave(client) {
         this.state.removePlayer(client)
-        console.log(`${ client.id } left match room.`)
+        console.log(`${client.id} left match room.`)
     };
 
     //When a client send a message
-    onMessage (client, data) {
-        console.log("MatchRoom:", client.id, data);
+    onMessage(client, data) {
+        //console.log("MatchRoom:", client.id, data);
         this.state[data.type](client.id, data.payload);
     };
 
     //Cleanup callback, called after there are no more clients on the room
-    onDispose () {
+    onDispose() {
         console.log("Dispose match Room")
     };
 
-    update () {
+    update() {
         this.state.calculateState()
-        var teamKeys = Object.keys(this.state.teams);
-        teamKeys.forEach(teamKey => {
-            var teamHealth = this.state.teams[teamKey].base.health;
-            if(teamHealth <= 0) {
-                this.disconnect();
-            }
-        });
     };
 };

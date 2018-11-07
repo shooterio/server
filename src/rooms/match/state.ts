@@ -17,19 +17,18 @@ export class State {
     bullets: EntityMap<Bullet> = {};
     map: Map = new Map(5000, 10000, new Position(5000, 5000));
 
-    constructor () {
+    constructor() {
         console.log(this.map);
         this.addTeam(new Team("Red", new Base(100, new Position(1500, 5000))));
         this.addTeam(new Team("Blue", new Base(100, new Position(8500, 5000))));
         console.log(this.teams);
     };
 
-    addTeam (team: Team)
-    {
+    addTeam(team: Team) {
         this.teams[team.id] = team;
     }
 
-    addPlayer (client) {
+    addPlayer(client) {
         var team = this.getTeamIdWithFewestPlayers();
 
         this.players[client.id] = new Player(
@@ -40,113 +39,111 @@ export class State {
             team,
             new PlayerInput(false, false, false, false));
         console.log(this.players);
-        
+
         console.log('added player');
     };
 
-    removePlayer (client) {
+    removePlayer(client) {
         delete this.players[client.id]
         console.log('removed player');
     };
 
-    addBullet (clientid) {
+    addBullet(clientid) {
         var bullet: Bullet = new Bullet(
             new Position(this.players[clientid].position.x,
                 this.players[clientid].position.y),
-                this.players[clientid],
-                this.players[clientid].rotation + Math.floor(Math.random() * 6) - 3);
+            this.players[clientid],
+            this.players[clientid].rotation + Math.floor(Math.random() * 6) - 3);
 
-                
-        bullet.position.x = bullet.position.x + ((this.players[clientid].radius + bullet.radius) * Math.cos((bullet.rotation + 90)*(Math.PI/180)));
-        bullet.position.y = bullet.position.y + ((this.players[clientid].radius + bullet.radius) * Math.sin((bullet.rotation+90)*(Math.PI/180)));
+
+        bullet.position.x = bullet.position.x + ((this.players[clientid].radius + bullet.radius) * Math.cos((bullet.rotation + 90) * (Math.PI / 180)));
+        bullet.position.y = bullet.position.y + ((this.players[clientid].radius + bullet.radius) * Math.sin((bullet.rotation + 90) * (Math.PI / 180)));
         this.bullets[bullet.id] = bullet;
     }
 
     getTeamsAsArray() {
         var teams = this.teams;
         var keysTeams = Object.keys(teams);
-    
+
         var teamsArr = [];
-    
+
         keysTeams.forEach(keyTeam => {
-          teamsArr.push(teams[keyTeam]);
+            teamsArr.push(teams[keyTeam]);
         });
-    
+
         return teamsArr;
     };
 
     getTeamIdWithFewestPlayers() {
         var teams = this.teams;
         var keysTeams = Object.keys(teams);
-    
+
         var players = this.players;
         var keysPlayers = Object.keys(this.players);
 
         var teamWithFewestPlayers;
         var numberOfPlayersInTeamWithFewestPlayers = Infinity;
-    
+
         keysTeams.forEach(keyTeam => {
-          var numberOfPlayersInTeam = 0;
-          keysPlayers.forEach(keyPlayer => {
-            var isInThisTeam = players[keyPlayer].teamId == keyTeam;
-            numberOfPlayersInTeam = isInThisTeam ? numberOfPlayersInTeam + 1 : numberOfPlayersInTeam;
-          });
-    
-          if(teamWithFewestPlayers) {
-            teamWithFewestPlayers = numberOfPlayersInTeamWithFewestPlayers > numberOfPlayersInTeam ?
-            teams[keyTeam] :
-            teamWithFewestPlayers;
-            numberOfPlayersInTeamWithFewestPlayers = numberOfPlayersInTeam;
-          } else {
-            teamWithFewestPlayers = teams[keyTeam];
-            numberOfPlayersInTeamWithFewestPlayers = numberOfPlayersInTeam;
-          };
+            var numberOfPlayersInTeam = 0;
+            keysPlayers.forEach(keyPlayer => {
+                var isInThisTeam = players[keyPlayer].teamId == keyTeam;
+                numberOfPlayersInTeam = isInThisTeam ? numberOfPlayersInTeam + 1 : numberOfPlayersInTeam;
+            });
+
+            if (teamWithFewestPlayers) {
+                teamWithFewestPlayers = numberOfPlayersInTeamWithFewestPlayers > numberOfPlayersInTeam ?
+                    teams[keyTeam] :
+                    teamWithFewestPlayers;
+                numberOfPlayersInTeamWithFewestPlayers = numberOfPlayersInTeam;
+            } else {
+                teamWithFewestPlayers = teams[keyTeam];
+                numberOfPlayersInTeamWithFewestPlayers = numberOfPlayersInTeam;
+            };
         });
-    
+
         return teamWithFewestPlayers.id;
-    
+
     }
 
-    [ActionTypes.MOVE_UP] (clientid, payload) {
-        if(payload) {
+    [ActionTypes.MOVE_UP](clientid, payload) {
+        if (payload) {
             this.players[clientid].playerInput.up = payload;
         } else {
             this.players[clientid].playerInput.up = payload;
         }
     }
 
-    [ActionTypes.MOVE_DOWN] (clientid, payload) {
-        if(payload) {
+    [ActionTypes.MOVE_DOWN](clientid, payload) {
+        if (payload) {
             this.players[clientid].playerInput.down = payload;
         } else {
             this.players[clientid].playerInput.down = payload;
         }
     }
 
-    [ActionTypes.MOVE_LEFT] (clientid, payload) {
-        if(payload) {
+    [ActionTypes.MOVE_LEFT](clientid, payload) {
+        if (payload) {
             this.players[clientid].playerInput.left = payload;
         } else {
             this.players[clientid].playerInput.left = payload;
         }
     }
 
-    [ActionTypes.MOVE_RIGHT] (clientid, payload) {
-        if(payload) {
+    [ActionTypes.MOVE_RIGHT](clientid, payload) {
+        if (payload) {
             this.players[clientid].playerInput.right = payload;
         } else {
             this.players[clientid].playerInput.right = payload;
         }
-    } 
-    
-    [ActionTypes.SHOOT] (clientid, payload) {
+    }
+
+    [ActionTypes.SHOOT](clientid, payload) {
         console.log("shoot");
         this.addBullet(clientid);
     }
 
-    [ActionTypes.PLAYER_ROTATE] (clientid, payload) {
-        console.log("player_rotate");
-        if(payload < 0) {payload += 360};
+    [ActionTypes.PLAYER_ROTATE](clientid, payload) {
         payload = Math.round(payload);
         this.players[clientid].rotation = payload;
     }
@@ -156,6 +153,17 @@ export class State {
         this.calculateBulletMovement();
         this.checkBulletLifeCycle();
         this.collisionHit();
+        this.calculateHasTeamWon();
+    }
+
+    calculateHasTeamWon() {
+        var teamKeys = Object.keys(this.teams);
+        teamKeys.forEach(teamKey => {
+            var teamHealth = this.teams[teamKey].base.health;
+            if (teamHealth <= 0) {
+                this.resetGameState();
+            }
+        });
     }
 
     calculateBulletMovement() {
@@ -163,122 +171,127 @@ export class State {
 
         keysBullet.forEach((keyBullet) => {
             var bullet = this.bullets[keyBullet];
-            bullet.position.x = bullet.position.x + (bullet.speed * Math.cos((bullet.rotation + 90)*(Math.PI/180)));
-            bullet.position.y = bullet.position.y + (bullet.speed * Math.sin((bullet.rotation+90)*(Math.PI/180)));
+            bullet.position.x = bullet.position.x + (bullet.speed * Math.cos((bullet.rotation + 90) * (Math.PI / 180)));
+            bullet.position.y = bullet.position.y + (bullet.speed * Math.sin((bullet.rotation + 90) * (Math.PI / 180)));
         });
     }
 
-    checkBulletLifeCycle () {
+    checkBulletLifeCycle() {
         var keysBullet = Object.keys(this.bullets);
 
         keysBullet.forEach((keyBullet) => {
-            if(Date.now() - this.bullets[keyBullet].spawnTime > 1000) {
-                delete this.bullets[keyBullet]; 
+            if (Date.now() - this.bullets[keyBullet].spawnTime > 1000) {
+                delete this.bullets[keyBullet];
             }
         });
     }
 
-    collisionHit () {
-        var keysPlayer = Object.keys(this.players);
+    collisionHit() {
         var keysBullets = Object.keys(this.bullets);
         var keysTeams = Object.keys(this.teams);
 
         keysBullets.forEach((keyBullet) => {
             var bullet = this.bullets[keyBullet];
 
-            for(var i = 0; i < keysPlayer.length; i++){
-                var key = keysPlayer[i];
-                var player = this.players[key];
+            for (let keyPlayer in this.players) {
+                var a = bullet.position.x - this.players[keyPlayer].position.x;
+                var b = bullet.position.y - this.players[keyPlayer].position.y;
 
-                var a = bullet.position.x - player.position.x;
-                var b = bullet.position.y - player.position.y;
+                var distance = Math.sqrt(a * a + b * b);
 
-                var distance = Math.sqrt(a*a + b*b);
-
-                if(distance < (bullet.radius + player.radius)) {
+                if (distance < (bullet.radius + this.players[keyPlayer].radius)) {
                     //HIT
-                    this.players[key].health = player.health - (bullet.damage * 20);
+                    this.players[keyPlayer].health = this.players[keyPlayer].health - (bullet.damage * 20);
                     delete this.bullets[keyBullet];
-                    if(this.players[key].health <= 0) {
-                        var teamSpawn = this.teams[player.teamId].base.position;
-                        this.players[key].health = 100;
-                        this.players[key].position.x = teamSpawn.x;
-                        this.players[key].position.y = teamSpawn.y;
+                    if (this.players[keyPlayer].health <= 0) {
+                        var teamSpawn = this.teams[this.players[keyPlayer].teamId].base.position;
+                        this.players[keyPlayer].health = 100;
+                        this.players[keyPlayer].position.x = teamSpawn.x;
+                        this.players[keyPlayer].position.y = teamSpawn.y;
                     }
                     break;
                 }
             }
 
-            if(bullet){
-                for(var i = 0; i < keysTeams.length; i++){
-                    var key = keysTeams[i];
-                    var base = this.teams[key].base;
-    
+            if (bullet) {
+                for (let keyTeam in this.teams) {
+                    var base = this.teams[keyTeam].base;
+
                     var a = bullet.position.x - base.position.x;
                     var b = bullet.position.y - base.position.y;
-    
-                    var distance = Math.sqrt(a*a + b*b);
-    
-                    if(distance < (bullet.radius + base.radius)) {
+
+                    var distance = Math.sqrt(a * a + b * b);
+
+                    if (distance < (bullet.radius + base.radius)) {
                         //HIT
-                        this.teams[key].base.health = base.health - bullet.damage;
+                        this.teams[keyTeam].base.health = base.health - bullet.damage * 50;
                         delete this.bullets[keyBullet];
                         break;
                     }
                 }
             }
-            
+
         });
     }
 
     movePlayers() {
         var BASE_MOVE = 3;
-        
+
         var keysPlayers = Object.keys(this.players);
-        
+
         keysPlayers.forEach(keyPlayer => {
             var distanceToTravel = BASE_MOVE * this.players[keyPlayer].moveSpeed;
-            if(this.players[keyPlayer].playerInput.up) {
-                if(this.checkIfYUpCoordinatesInGame(this.players[keyPlayer].position.y)){
+            if (this.players[keyPlayer].playerInput.up) {
+                if (this.checkIfYUpCoordinatesInGame(this.players[keyPlayer].position.y)) {
                     this.players[keyPlayer].position.y = this.players[keyPlayer].position.y + distanceToTravel;
                 }
             }
-            if(this.players[keyPlayer].playerInput.down) {
-                if(this.checkIfYDownCoordinatesInGame(this.players[keyPlayer].position.y)){
+            if (this.players[keyPlayer].playerInput.down) {
+                if (this.checkIfYDownCoordinatesInGame(this.players[keyPlayer].position.y)) {
                     this.players[keyPlayer].position.y = this.players[keyPlayer].position.y - distanceToTravel;
                 }
             }
-            if(this.players[keyPlayer].playerInput.left) {
-                if(this.checkIfXLeftCoordinatesInGame(this.players[keyPlayer].position.x)){
+            if (this.players[keyPlayer].playerInput.left) {
+                if (this.checkIfXLeftCoordinatesInGame(this.players[keyPlayer].position.x)) {
                     this.players[keyPlayer].position.x = this.players[keyPlayer].position.x - distanceToTravel;
                 }
             }
-            if(this.players[keyPlayer].playerInput.right) {
-                if(this.checkIfXRightCoordinatesInGame(this.players[keyPlayer].position.x)){
+            if (this.players[keyPlayer].playerInput.right) {
+                if (this.checkIfXRightCoordinatesInGame(this.players[keyPlayer].position.x)) {
                     this.players[keyPlayer].position.x = this.players[keyPlayer].position.x + distanceToTravel;
                 }
             }
         });
-        
+
     }
 
-    checkIfXRightCoordinatesInGame(x: number)
-    {
-        return x < 10000;
+    checkIfXRightCoordinatesInGame(x: number) {
+        return x < this.map.position.x + (this.map.width / 2);
     }
 
-    checkIfXLeftCoordinatesInGame(x: number)
-    {
-        return x > 0;
+    checkIfXLeftCoordinatesInGame(x: number) {
+        return x > this.map.position.x - (this.map.width / 2);
     }
 
-    checkIfYUpCoordinatesInGame(y:number)
-    {
-        return y < 7500;
+    checkIfYUpCoordinatesInGame(y: number) {
+        return y < this.map.position.y + (this.map.height / 2);
     }
 
-    checkIfYDownCoordinatesInGame(y:number)
-    {
-        return y > 2500;
+    checkIfYDownCoordinatesInGame(y: number) {
+        return y > this.map.position.y - (this.map.height / 2);
+    }
+
+    resetGameState() {
+        for (let key in this.bullets) {
+            delete this.bullets[key];
+        }
+        for (let key in this.teams) {
+            this.teams[key].base.health = 100;
+        }
+        for (let key in this.players) {
+            this.players[key].health = 100;
+            this.players[key].position.x = this.teams[this.players[key].teamId].base.position.x;
+            this.players[key].position.y = this.teams[this.players[key].teamId].base.position.y;
+        }
     }
 };

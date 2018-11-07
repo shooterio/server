@@ -3,9 +3,9 @@ import { PlayerInput } from './../models/playerInput';
 
 export class Player {
     public rotation: number;
-    public radius
+    public radius: number;
 
-    constructor (
+    constructor(
         public id: string,
         public health: number,
         public moveSpeed: number,
@@ -19,7 +19,7 @@ export class Player {
         this.position = position;
         this.teamId = teamId;
         this.radius = 90;
-        this.playerInput = playerInput; 
+        this.playerInput = playerInput;
         this.rotation = 180;
     }
 }
