@@ -9,15 +9,16 @@ export class Bullet {
     public radius: number;
     public spawnTime: any;
 
-    constructor (
+    constructor(
         public position: Position,
-        public owner: Player,
+        public playerId: string,
         public rotation: number
     ) {
         this.id = shortid.generate();
         this.speed = 50;
         this.radius = 50;
-        this.damage =  1;
+        this.damage = 1;
+        this.playerId = playerId;
         this.position = position;
         this.spawnTime = Date.now();
     }

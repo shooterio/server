@@ -52,7 +52,7 @@ export class State {
         var bullet: Bullet = new Bullet(
             new Position(this.players[clientid].position.x,
                 this.players[clientid].position.y),
-            this.players[clientid],
+            this.players[clientid].id,
             this.players[clientid].rotation + Math.floor(Math.random() * 6) - 3);
 
 
@@ -157,13 +157,18 @@ export class State {
     }
 
     calculateHasTeamWon() {
-        var teamKeys = Object.keys(this.teams);
-        teamKeys.forEach(teamKey => {
-            var teamHealth = this.teams[teamKey].base.health;
-            if (teamHealth <= 0) {
+        for (let key in this.teams) {
+            if (this.teams[key].base.health <= 0) {
+                for (let key in this.teams) {
+                    if (this.teams[key].base.health > 0) {
+                        this.teams[key].score += 1;
+                    }
+                    console.log(this.teams[key].score)
+                }
                 this.resetGameState();
+                break;
             }
-        });
+        }
     }
 
     calculateBulletMovement() {
@@ -188,7 +193,6 @@ export class State {
 
     collisionHit() {
         var keysBullets = Object.keys(this.bullets);
-        var keysTeams = Object.keys(this.teams);
 
         keysBullets.forEach((keyBullet) => {
             var bullet = this.bullets[keyBullet];
@@ -215,18 +219,21 @@ export class State {
 
             if (bullet) {
                 for (let keyTeam in this.teams) {
-                    var base = this.teams[keyTeam].base;
+                    if (this.teams[keyTeam].id != this.players[bullet.playerId].teamId) {
+                        var base = this.teams[keyTeam].base;
 
-                    var a = bullet.position.x - base.position.x;
-                    var b = bullet.position.y - base.position.y;
+                        var a = bullet.position.x - base.position.x;
+                        var b = bullet.position.y - base.position.y;
 
-                    var distance = Math.sqrt(a * a + b * b);
+                        var distance = Math.sqrt(a * a + b * b);
 
-                    if (distance < (bullet.radius + base.radius)) {
-                        //HIT
-                        this.teams[keyTeam].base.health = base.health - bullet.damage * 50;
-                        delete this.bullets[keyBullet];
-                        break;
+                        if (distance < (bullet.radius + base.radius)) {
+                            //HIT
+                            this.teams[keyTeam].base.health = base.health - bullet.damage * 50;
+                            delete this.bullets[keyBullet];
+                            break;
+                        }
+
                     }
                 }
             }
