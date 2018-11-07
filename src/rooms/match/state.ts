@@ -229,7 +229,7 @@ export class State {
 
                         if (distance < (bullet.radius + base.radius)) {
                             //HIT
-                            this.teams[keyTeam].base.health = base.health - bullet.damage * 50;
+                            this.teams[keyTeam].base.health = base.health - bullet.damage * 2;
                             delete this.bullets[keyBullet];
                             break;
                         }
