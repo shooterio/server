@@ -1,7 +1,7 @@
 {
-  "name": "unityecstestserver",
+  "name": "shooterio-server",
   "version": "0.0.1",
-  "description": "game server",
+  "description": "shooter io game server",
   "main": "dist/server/bundle.js",
   "scripts": {
     "start": "npm run bundle && node dist/server/bundle.js",
@@ -14,7 +14,8 @@
   },
   "keywords": [
     "game",
-    "server"
+    "server",
+    "colyseus"
   ],
   "author": "",
   "license": "MIT",
